@@ -1,7 +1,6 @@
 package com.android.myanimelist.api
 
 
-
 import com.android.myanimelist.model.base.TopAnimeResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -36,5 +35,8 @@ interface AnimeApi {
      * @return List of top anime on MyAnimeList.
      */
     @GET("top/anime/{page}/{subType}/")
-    suspend fun getTopAnime(@Path("page") page: Int? = 1, @Path("subType") subtype: String? = ""): Response<TopAnimeResponse>
+    suspend fun getTopAnime(
+        @Path("page") page: Int? = 1,
+        @Path("subType") subtype: String? = ""
+    ): Response<TopAnimeResponse>
 }

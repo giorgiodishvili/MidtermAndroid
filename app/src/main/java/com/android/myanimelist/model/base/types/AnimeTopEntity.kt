@@ -1,11 +1,8 @@
 package com.android.myanimelist.model.base.types
 
 import android.os.Parcelable
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.google.gson.annotations.SerializedName
 import com.android.myanimelist.model.base.MalEntity
-import com.bumptech.glide.Glide
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -75,9 +72,7 @@ data class AnimeTopEntity(
      */
     @SerializedName("score")
     val score: Double? = null
-) : MalEntity,Parcelable {
-
-
+) : MalEntity, Parcelable {
 
 
 }

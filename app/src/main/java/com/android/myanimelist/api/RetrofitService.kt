@@ -13,6 +13,6 @@ object RetrofitService {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AnimeApi::class.java)
-        }
+    }
 
 }

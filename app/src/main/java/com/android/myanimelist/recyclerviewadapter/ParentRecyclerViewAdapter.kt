@@ -12,21 +12,25 @@ import com.android.myanimelist.model.TopSubtype
 import com.android.myanimelist.model.base.types.AnimeTopEntity
 
 
-class ParentRecyclerViewAdapter(private var parents: MutableList<TopSubtype>, private val children: MutableMap<Int, MutableList<AnimeTopEntity>>) :
+class ParentRecyclerViewAdapter(
+    private var parents: MutableList<TopSubtype>,
+    private val children: MutableMap<Int, MutableList<AnimeTopEntity>>
+) :
     RecyclerView.Adapter<ParentRecyclerViewAdapter.ChildRecyclerViewHolder>() {
     private lateinit var binding: ParentRecyclerViewItemBinding
     private val viewPool = RecyclerView.RecycledViewPool()
 
-    inner class ChildRecyclerViewHolder(binding: ParentRecyclerViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ChildRecyclerViewHolder(binding: ParentRecyclerViewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         private val recyclerView: RecyclerView = binding.ChildRV
         fun onBind() {
             var name = parents[absoluteAdapterPosition].name
-            if(name == "NONE"){
-                name="TOP ANIME"
+            if (name == "NONE") {
+                name = "TOP ANIME"
             }
             binding.setAnimeCategory(name)
             val childLayoutManager = LinearLayoutManager(
-                recyclerView.context,LinearLayoutManager.HORIZONTAL,false
+                recyclerView.context, LinearLayoutManager.HORIZONTAL, false
             )
             childLayoutManager.initialPrefetchItemCount = 4
 
@@ -42,8 +46,8 @@ class ParentRecyclerViewAdapter(private var parents: MutableList<TopSubtype>, pr
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildRecyclerViewHolder {
         binding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context)
-            , R.layout.parent_recycler_view_item, parent, false)
+            LayoutInflater.from(parent.context), R.layout.parent_recycler_view_item, parent, false
+        )
         return ChildRecyclerViewHolder(binding)
     }
 
@@ -52,7 +56,7 @@ class ParentRecyclerViewAdapter(private var parents: MutableList<TopSubtype>, pr
     }
 
     override fun onBindViewHolder(holder: ChildRecyclerViewHolder, position: Int) {
-            holder.onBind()
+        holder.onBind()
     }
 
 }
