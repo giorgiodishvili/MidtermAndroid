@@ -9,17 +9,55 @@
         android:id="@+id/navigation_home"
         android:name="com.android.myanimelist.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_animeFragment"
+            app:destination="@id/animeFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.android.myanimelist.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_search"
+        android:name="com.android.myanimelist.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_animeFragment"
+            app:destination="@id/animeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_you"
         android:name="com.android.myanimelist.ui.you.YouFragment"
         android:label="@string/title_you"
-        tools:layout="@layout/fragment_you" />
+        tools:layout="@layout/fragment_you">
+        <action
+            android:id="@+id/action_navigation_you_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_navigation_you_to_registerAccountFragment"
+            app:destination="@id/registerAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.android.myanimelist.ui.authentification.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerAccountFragment"
+            app:destination="@id/registerAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAccountFragment"
+        android:name="com.android.myanimelist.ui.authentification.RegisterAccountFragment"
+        android:label="fragment_register_account"
+        tools:layout="@layout/fragment_register_account">
+        <action
+            android:id="@+id/action_registerAccountFragment_to_navigation_you"
+            app:destination="@id/navigation_you" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeFragment"
+        android:name="com.android.myanimelist.ui.anime.AnimeFragment"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" />
 </navigation>

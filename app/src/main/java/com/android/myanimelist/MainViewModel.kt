@@ -11,14 +11,17 @@ import java.util.*
 
 class MainViewModel : ViewModel() {
 
-    private val fetchedFields =
+    private val fetchedAnimesByCategory =
         MutableLiveData<MutableMap<Int, MutableList<AnimeTopEntity>>>().apply {
             MutableLiveData<MutableMap<Int, MutableList<AnimeTopEntity>>>()
         }
 
-    val _fetchedFields = fetchedFields
+    val _fetchedAnimesByCategory = fetchedAnimesByCategory
 
     private val animeMap: MutableMap<Int, MutableList<AnimeTopEntity>> = mutableMapOf()
+
+
+
 
 
     fun init() {
@@ -55,7 +58,7 @@ class MainViewModel : ViewModel() {
                     populate(TopSubtype.NONE)
                 }
                 processes7.await()
-                fetchedFields.postValue(animeMap)
+                fetchedAnimesByCategory.postValue(animeMap)
             }
         }
     }
@@ -76,4 +79,8 @@ class MainViewModel : ViewModel() {
             animeMap[subType.ordinal] = data!!.top as MutableList<AnimeTopEntity>
         }
     }
+
+
+
+
 }

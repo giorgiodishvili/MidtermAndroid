@@ -1,31 +1,34 @@
 package com.android.myanimelist.api
 
 
+import com.android.myanimelist.model.anime.Anime
 import com.android.myanimelist.model.base.TopAnimeResponse
+import com.android.myanimelist.model.search.AnimeSearchResult
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface AnimeApi {
-
-    @GET("top/anime/{page}/movie")
-    suspend fun getTopAnimeMovie(@Path("page") page: Int = 1): Response<List<List<*>>>
-
-    @GET("top/anime/{page}/airing")
-    suspend fun getTopAnimeAiring(@Path("page") page: Int = 1): Response<List<List<*>>>
-
-    @GET("top/anime/{page}/upcoming")
-    suspend fun getTopAnimeUpcoming(@Path("page") page: Int = 1): Response<List<List<*>>>
-
-    @GET("top/anime/{page}/tv")
-    suspend fun getTopAnimeTv(@Path("page") page: Int = 1): Response<List<List<*>>>
-
-    @GET("top/anime/{page}/ova")
-    suspend fun getTopAnimeOva(@Path("page") page: Int = 1): Response<List<List<*>>>
-
-    @GET("top/anime/{page}/special")
-    suspend fun getTopAnimeSpecial(@Path("page") page: Int = 1): Response<List<List<*>>>
+//
+//    @GET("top/anime/{page}/movie")
+//    suspend fun getTopAnimeMovie(@Path("page") page: Int = 1): Response<List<List<*>>>
+//
+//    @GET("top/anime/{page}/airing")
+//    suspend fun getTopAnimeAiring(@Path("page") page: Int = 1): Response<List<List<*>>>
+//
+//    @GET("top/anime/{page}/upcoming")
+//    suspend fun getTopAnimeUpcoming(@Path("page") page: Int = 1): Response<List<List<*>>>
+//
+//    @GET("top/anime/{page}/tv")
+//    suspend fun getTopAnimeTv(@Path("page") page: Int = 1): Response<List<List<*>>>
+//
+//    @GET("top/anime/{page}/ova")
+//    suspend fun getTopAnimeOva(@Path("page") page: Int = 1): Response<List<List<*>>>
+//
+//    @GET("top/anime/{page}/special")
+//    suspend fun getTopAnimeSpecial(@Path("page") page: Int = 1): Response<List<List<*>>>
 
 
     /**
@@ -39,4 +42,15 @@ interface AnimeApi {
         @Path("page") page: Int? = 1,
         @Path("subType") subtype: String? = ""
     ): Response<TopAnimeResponse>
+
+    @GET("anime/{malId}/")
+    suspend fun getAnime(
+        @Path("malId") malId: Int
+    ): Response<Anime>
+
+    @GET("search/anime/")
+    suspend fun searchAnime(
+        @Query("q") searchKeyWord: String,
+        @Query("page") page: Int
+    ): Response<AnimeSearchResult>
 }

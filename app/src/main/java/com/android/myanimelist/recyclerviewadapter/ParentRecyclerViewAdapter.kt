@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myanimelist.R
+import com.android.myanimelist.callback.ChildRVListener
 import com.android.myanimelist.databinding.ParentRecyclerViewItemBinding
 import com.android.myanimelist.model.TopSubtype
 import com.android.myanimelist.model.base.types.AnimeTopEntity
@@ -14,7 +15,8 @@ import com.android.myanimelist.model.base.types.AnimeTopEntity
 
 class ParentRecyclerViewAdapter(
     private var parents: MutableList<TopSubtype>,
-    private val children: MutableMap<Int, MutableList<AnimeTopEntity>>
+    private val children: MutableMap<Int, MutableList<AnimeTopEntity>>,
+    private val listener: ChildRVListener
 ) :
     RecyclerView.Adapter<ParentRecyclerViewAdapter.ChildRecyclerViewHolder>() {
     private lateinit var binding: ParentRecyclerViewItemBinding
@@ -33,12 +35,11 @@ class ParentRecyclerViewAdapter(
                 recyclerView.context, LinearLayoutManager.HORIZONTAL, false
             )
             childLayoutManager.initialPrefetchItemCount = 4
-
             recyclerView.apply {
                 layoutManager = childLayoutManager
                 //TODO set data to childRecyclerView
                 i("children", children[absoluteAdapterPosition].toString())
-                adapter = ChildRecyclerViewAdapter(children[absoluteAdapterPosition])
+                adapter = ChildRecyclerViewAdapter(children[absoluteAdapterPosition], listener)
                 setRecycledViewPool(viewPool)
             }
         }

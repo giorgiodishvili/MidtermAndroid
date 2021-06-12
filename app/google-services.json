@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "157999273553",
+    "project_id": "myanimelist-2499f",
+    "storage_bucket": "myanimelist-2499f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157999273553:android:8b4680e92f88c85b0d0a70",
+        "android_client_info": {
+          "package_name": "com.android.myanimelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157999273553-5j285g6q2o2kq9qbfaepdi4tpbptcqbe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.myanimelist",
+            "certificate_hash": "19919899a3fcad71eba3480c071d2a4446701a71"
+          }
+        },
+        {
+          "client_id": "157999273553-18814jv7vlt6j1qftatpt9v36dpn3t3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKQVQDlPDs7Vwuej415eRywv2ctZOO720"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157999273553-18814jv7vlt6j1qftatpt9v36dpn3t3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

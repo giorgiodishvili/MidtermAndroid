@@ -17,10 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_MyAnimeList)
         supportActionBar?.hide()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-
         viewModel.init()
 
         val navView: BottomNavigationView = binding.navView
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_you
+                R.id.navigation_home, R.id.navigation_search, R.id.navigation_you
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
