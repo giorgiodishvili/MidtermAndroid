@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class AnimeTopEntity(
+data class AnimeGeneralEntity(
     /**
      * ID associated with MyAnimeList.
      */
@@ -26,7 +26,7 @@ data class AnimeTopEntity(
     val title: String? = null,
 
 
-) : MalEntity, Parcelable {
+    ) : MalEntity, Parcelable {
 
 
 }

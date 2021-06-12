@@ -5,20 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.myanimelist.api.RetrofitService
 import com.android.myanimelist.model.TopSubtype
-import com.android.myanimelist.model.base.types.AnimeTopEntity
+import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 import kotlinx.coroutines.*
 import java.util.*
 
 class MainViewModel : ViewModel() {
 
     private val fetchedAnimesByCategory =
-        MutableLiveData<MutableMap<Int, MutableList<AnimeTopEntity>>>().apply {
-            MutableLiveData<MutableMap<Int, MutableList<AnimeTopEntity>>>()
+        MutableLiveData<MutableMap<Int, MutableList<AnimeGeneralEntity>>>().apply {
+            MutableLiveData<MutableMap<Int, MutableList<AnimeGeneralEntity>>>()
         }
 
     val _fetchedAnimesByCategory = fetchedAnimesByCategory
 
-    private val animeMap: MutableMap<Int, MutableList<AnimeTopEntity>> = mutableMapOf()
+    private val animeMap: MutableMap<Int, MutableList<AnimeGeneralEntity>> = mutableMapOf()
 
 
     fun init() {
@@ -65,7 +65,7 @@ class MainViewModel : ViewModel() {
         if (subType.name == TopSubtype.NONE.name) {
             val topAnime = RetrofitService.RETROFIT.getTopAnime(1)
             val data = topAnime.body()
-            animeMap[subType.ordinal] = data!!.top as MutableList<AnimeTopEntity>
+            animeMap[subType.ordinal] = data!!.general as MutableList<AnimeGeneralEntity>
         } else {
 
             val topAnime = RetrofitService.RETROFIT.getTopAnime(
@@ -73,7 +73,7 @@ class MainViewModel : ViewModel() {
                 subType.name.lowercase(Locale.getDefault())
             )
             val data = topAnime.body()
-            animeMap[subType.ordinal] = data!!.top as MutableList<AnimeTopEntity>
+            animeMap[subType.ordinal] = data!!.general as MutableList<AnimeGeneralEntity>
         }
     }
 

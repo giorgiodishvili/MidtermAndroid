@@ -16,7 +16,7 @@ import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.TopAnimeCategoryListFragmentBinding
 import com.android.myanimelist.model.TopSubtype
 import com.android.myanimelist.pagination.LoaderStateAdapter
-import com.android.myanimelist.recyclerviewadapter.SearchRecyclerViewAdapter
+import com.android.myanimelist.recyclerviewadapter.GeneralRecyclerViewAdapter
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -24,14 +24,19 @@ class TopAnimeCategoryListFragment : Fragment() {
 
     private val viewModel: TopAnimeCategoryListViewModel by viewModels()
     private lateinit var binding: TopAnimeCategoryListFragmentBinding
-    private lateinit var adapter: SearchRecyclerViewAdapter
+    private lateinit var adapter: GeneralRecyclerViewAdapter
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.top_anime_category_list_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.top_anime_category_list_fragment,
+            container,
+            false
+        )
         init()
         return binding.root
     }
@@ -40,7 +45,7 @@ class TopAnimeCategoryListFragment : Fragment() {
         binding.progrssBar.visibility = View.VISIBLE
         initRecycler()
         var category = arguments?.getString("topSubtype")!!
-        if(category == TopSubtype.NONE.name.lowercase(Locale.getDefault())){
+        if (category == TopSubtype.NONE.name.lowercase(Locale.getDefault())) {
             category = ""
         }
         viewModel.getTopAnime(category).observe(viewLifecycleOwner, {
@@ -52,7 +57,7 @@ class TopAnimeCategoryListFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        adapter = SearchRecyclerViewAdapter(
+        adapter = GeneralRecyclerViewAdapter(
             object : ChildRvListener {
                 override fun onClick(malId: Int) {
                     findNavController().navigate(

@@ -9,11 +9,11 @@ import com.android.myanimelist.MainViewModel
 import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.ChildRecyclerViewItemBinding
-import com.android.myanimelist.model.base.types.AnimeTopEntity
+import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 
 
 class ChildRecyclerViewAdapter(
-    private val list: MutableList<AnimeTopEntity>?,
+    private val list: MutableList<AnimeGeneralEntity>?,
     val listener: ChildRvListener
 ) :
     RecyclerView.Adapter<ChildRecyclerViewAdapter.MyViewHolder>() {
@@ -45,16 +45,16 @@ class ChildRecyclerViewAdapter(
 
     inner class MyViewHolder(binding: ChildRecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var animeTopEntity: AnimeTopEntity
+        private lateinit var animeGeneralEntity: AnimeGeneralEntity
 
         fun onBind() {
-            animeTopEntity = list?.get(absoluteAdapterPosition)!!
-            binding.animeTopEntity = animeTopEntity
+            animeGeneralEntity = list?.get(absoluteAdapterPosition)!!
+            binding.animeTopEntity = animeGeneralEntity
             i("onClikkk", "bla")
 
             binding.root.setOnClickListener {
                 i("onClikkk", "onBindinit()")
-                listener.onClick(animeTopEntity.malId)
+                listener.onClick(animeGeneralEntity.malId)
             }
         }
     }

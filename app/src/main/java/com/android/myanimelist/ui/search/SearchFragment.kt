@@ -18,14 +18,14 @@ import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.FragmentSearchBinding
 import com.android.myanimelist.pagination.LoaderStateAdapter
-import com.android.myanimelist.recyclerviewadapter.SearchRecyclerViewAdapter
+import com.android.myanimelist.recyclerviewadapter.GeneralRecyclerViewAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by viewModels()
     private lateinit var binding: FragmentSearchBinding
-    private lateinit var adapter: SearchRecyclerViewAdapter
+    private lateinit var adapter: GeneralRecyclerViewAdapter
 
 
     override fun onCreateView(
@@ -52,7 +52,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        adapter = SearchRecyclerViewAdapter(
+        adapter = GeneralRecyclerViewAdapter(
             object : ChildRvListener {
                 override fun onClick(malId: Int) {
                     findNavController().navigate(

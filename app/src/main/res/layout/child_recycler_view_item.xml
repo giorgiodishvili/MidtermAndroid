@@ -7,7 +7,7 @@
 
         <variable
             name="animeTopEntity"
-            type="com.android.myanimelist.model.base.types.AnimeTopEntity" />
+            type="com.android.myanimelist.model.base.types.AnimeGeneralEntity" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

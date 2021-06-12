@@ -67,7 +67,7 @@
         android:id="@+id/topAnimeCategoryListFragment"
         android:name="com.android.myanimelist.ui.categorylist.TopAnimeCategoryListFragment"
         android:label="top_anime_category_list_fragment"
-        tools:layout="@layout/top_anime_category_list_fragment" >
+        tools:layout="@layout/top_anime_category_list_fragment">
         <action
             android:id="@+id/action_topAnimeCategoryListFragment_to_animeFragment"
             app:destination="@id/animeFragment" />

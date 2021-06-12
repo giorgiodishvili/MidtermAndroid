@@ -3,29 +3,29 @@ package com.android.myanimelist.pagination.top
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.android.myanimelist.api.RetrofitService
-import com.android.myanimelist.model.base.types.AnimeTopEntity
+import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 import retrofit2.HttpException
 import java.io.IOException
 
 private const val STARTING_PAGE_INDEX = 1
 
 class TopAnimePagingSource(private val category: String) :
-    PagingSource<Int, AnimeTopEntity>() {
+    PagingSource<Int, AnimeGeneralEntity>() {
 
 
-    override fun getRefreshKey(state: PagingState<Int, AnimeTopEntity>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, AnimeGeneralEntity>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AnimeTopEntity> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AnimeGeneralEntity> {
         val position = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = RetrofitService.RETROFIT.getTopAnime(position,category)
+            val response = RetrofitService.RETROFIT.getTopAnime(position, category)
 
-            val data: List<AnimeTopEntity> = response.body()!!.top!!
+            val data: List<AnimeGeneralEntity> = response.body()!!.general!!
 
             LoadResult.Page(
                 data = data,

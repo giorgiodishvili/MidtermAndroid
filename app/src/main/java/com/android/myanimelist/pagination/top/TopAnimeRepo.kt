@@ -5,7 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.android.myanimelist.model.base.types.AnimeTopEntity
+import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 
 class TopAnimeRepo {
 
@@ -13,7 +13,7 @@ class TopAnimeRepo {
         private const val NETWORK_PAGE_SIZE = 10
     }
 
-    fun getTopAnime(category: String): LiveData<PagingData<AnimeTopEntity>> {
+    fun getTopAnime(category: String): LiveData<PagingData<AnimeGeneralEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,

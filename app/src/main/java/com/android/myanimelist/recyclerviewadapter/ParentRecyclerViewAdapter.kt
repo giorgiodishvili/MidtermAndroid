@@ -1,6 +1,5 @@
 package com.android.myanimelist.recyclerviewadapter
 
-import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,12 +10,12 @@ import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.callback.ParentRvListener
 import com.android.myanimelist.databinding.ParentRecyclerViewItemBinding
 import com.android.myanimelist.model.TopSubtype
-import com.android.myanimelist.model.base.types.AnimeTopEntity
+import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 
 
 class ParentRecyclerViewAdapter(
     private var parents: MutableList<TopSubtype>,
-    private val children: MutableMap<Int, MutableList<AnimeTopEntity>>,
+    private val children: MutableMap<Int, MutableList<AnimeGeneralEntity>>,
     private val listener: ChildRvListener,
     val parentListener: ParentRvListener
 ) :
@@ -36,7 +35,6 @@ class ParentRecyclerViewAdapter(
             childLayoutManager.initialPrefetchItemCount = 4
             recyclerView.apply {
                 layoutManager = childLayoutManager
-                i("children", children[absoluteAdapterPosition].toString())
                 adapter = ChildRecyclerViewAdapter(children[absoluteAdapterPosition], listener)
                 setRecycledViewPool(viewPool)
             }
@@ -44,7 +42,7 @@ class ParentRecyclerViewAdapter(
 
         private fun setParentRecycler() {
             var name = parents[absoluteAdapterPosition].name
-            if (name == "NONE") {
+            if (name == TopSubtype.NONE.name) {
                 name = "TOP ANIME"
             }
             binding.setAnimeCategory(name)

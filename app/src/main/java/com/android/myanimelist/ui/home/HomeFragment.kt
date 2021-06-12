@@ -18,7 +18,7 @@ import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.callback.ParentRvListener
 import com.android.myanimelist.databinding.FragmentHomeBinding
 import com.android.myanimelist.model.TopSubtype
-import com.android.myanimelist.model.base.types.AnimeTopEntity
+import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 import com.android.myanimelist.recyclerviewadapter.ParentRecyclerViewAdapter
 import java.util.*
 
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         observe()
     }
 
-    private fun initRecycler(child: MutableMap<Int, MutableList<AnimeTopEntity>>) {
+    private fun initRecycler(child: MutableMap<Int, MutableList<AnimeGeneralEntity>>) {
         adapter = ParentRecyclerViewAdapter(TopSubtype.values().toMutableList(), child,
             object : ChildRvListener {
                 override fun onClick(malId: Int) {
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
                     )
                 }
 
-            },object: ParentRvListener {
+            }, object : ParentRvListener {
                 override fun onSeeAllClickListener(topSubtype: TopSubtype) {
                     findNavController().navigate(
                         R.id.action_navigation_home_to_topAnimeCategoryListFragment,
