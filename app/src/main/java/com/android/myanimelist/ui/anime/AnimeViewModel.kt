@@ -1,10 +1,11 @@
-package com.android.myanimelist.model.anime
+package com.android.myanimelist.ui.anime
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.myanimelist.api.RetrofitService
+import com.android.myanimelist.model.anime.Anime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

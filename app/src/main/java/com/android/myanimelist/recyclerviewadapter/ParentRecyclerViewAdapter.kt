@@ -7,7 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myanimelist.R
-import com.android.myanimelist.callback.ChildRVListener
+import com.android.myanimelist.callback.ChildRvListener
+import com.android.myanimelist.callback.ParentRvListener
 import com.android.myanimelist.databinding.ParentRecyclerViewItemBinding
 import com.android.myanimelist.model.TopSubtype
 import com.android.myanimelist.model.base.types.AnimeTopEntity
@@ -16,7 +17,8 @@ import com.android.myanimelist.model.base.types.AnimeTopEntity
 class ParentRecyclerViewAdapter(
     private var parents: MutableList<TopSubtype>,
     private val children: MutableMap<Int, MutableList<AnimeTopEntity>>,
-    private val listener: ChildRVListener
+    private val listener: ChildRvListener,
+    val parentListener: ParentRvListener
 ) :
     RecyclerView.Adapter<ParentRecyclerViewAdapter.ChildRecyclerViewHolder>() {
     private lateinit var binding: ParentRecyclerViewItemBinding
@@ -26,21 +28,28 @@ class ParentRecyclerViewAdapter(
         RecyclerView.ViewHolder(binding.root) {
         private val recyclerView: RecyclerView = binding.ChildRV
         fun onBind() {
-            var name = parents[absoluteAdapterPosition].name
-            if (name == "NONE") {
-                name = "TOP ANIME"
-            }
-            binding.setAnimeCategory(name)
+            setParentRecycler()
+
             val childLayoutManager = LinearLayoutManager(
                 recyclerView.context, LinearLayoutManager.HORIZONTAL, false
             )
             childLayoutManager.initialPrefetchItemCount = 4
             recyclerView.apply {
                 layoutManager = childLayoutManager
-                //TODO set data to childRecyclerView
                 i("children", children[absoluteAdapterPosition].toString())
                 adapter = ChildRecyclerViewAdapter(children[absoluteAdapterPosition], listener)
                 setRecycledViewPool(viewPool)
+            }
+        }
+
+        private fun setParentRecycler() {
+            var name = parents[absoluteAdapterPosition].name
+            if (name == "NONE") {
+                name = "TOP ANIME"
+            }
+            binding.setAnimeCategory(name)
+            binding.seeAll.setOnClickListener {
+                parentListener.onSeeAllClickListener(parents[absoluteAdapterPosition])
             }
         }
     }
@@ -49,6 +58,7 @@ class ParentRecyclerViewAdapter(
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), R.layout.parent_recycler_view_item, parent, false
         )
+
         return ChildRecyclerViewHolder(binding)
     }
 
@@ -57,6 +67,7 @@ class ParentRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ChildRecyclerViewHolder, position: Int) {
+
         holder.onBind()
     }
 

@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.myanimelist.R
-import com.android.myanimelist.callback.ChildRVListener
+import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.FragmentSearchBinding
 import com.android.myanimelist.pagination.LoaderStateAdapter
 import com.android.myanimelist.recyclerviewadapter.SearchRecyclerViewAdapter
@@ -28,7 +28,6 @@ class SearchFragment : Fragment() {
     private lateinit var adapter: SearchRecyclerViewAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,19 +38,22 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    private fun init(){
-        binding.btnSearch.setOnClickListener{
+    private fun init() {
+        binding.btnSearch.setOnClickListener {
+            binding.loadSearch.visibility = VISIBLE
             val searchWord = checkInput()
             initRecycler()
-            if (searchWord != null) {
-                fetchAnime(searchWord)
+            if (searchWord == null) {
+                binding.loadSearch.visibility = GONE
+                return@setOnClickListener
             }
+            fetchAnime(searchWord)
         }
     }
 
     private fun initRecycler() {
         adapter = SearchRecyclerViewAdapter(
-            object : ChildRVListener {
+            object : ChildRvListener {
                 override fun onClick(malId: Int) {
                     findNavController().navigate(
                         R.id.action_navigation_search_to_animeFragment,
@@ -60,21 +62,20 @@ class SearchFragment : Fragment() {
                 }
             }
         )
-        binding.searchRv.layoutManager = GridLayoutManager(context,3)
+        binding.searchRv.layoutManager = GridLayoutManager(context, 3)
         binding.searchRv.adapter = adapter.withLoadStateFooter(LoaderStateAdapter())
     }
 
     private fun fetchAnime(searchWord: String) {
         searchViewModel.searchAnime(searchWord).observe(viewLifecycleOwner, {
             binding.loadSearch.visibility = GONE
-            lifecycleScope.launch{
+            lifecycleScope.launch {
                 adapter.submitData(it)
             }
         })
     }
 
     private fun checkInput(): String? {
-        binding.loadSearch.visibility = VISIBLE
         val searchWord = binding.etSearch.text.toString().trim()
         if (searchWord.isBlank()) {
             Toast.makeText(requireContext(), "Please input search word", Toast.LENGTH_SHORT).show()

@@ -14,11 +14,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.myanimelist.MainViewModel
 import com.android.myanimelist.R
-import com.android.myanimelist.callback.ChildRVListener
+import com.android.myanimelist.callback.ChildRvListener
+import com.android.myanimelist.callback.ParentRvListener
 import com.android.myanimelist.databinding.FragmentHomeBinding
 import com.android.myanimelist.model.TopSubtype
 import com.android.myanimelist.model.base.types.AnimeTopEntity
 import com.android.myanimelist.recyclerviewadapter.ParentRecyclerViewAdapter
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -44,11 +46,19 @@ class HomeFragment : Fragment() {
 
     private fun initRecycler(child: MutableMap<Int, MutableList<AnimeTopEntity>>) {
         adapter = ParentRecyclerViewAdapter(TopSubtype.values().toMutableList(), child,
-            object : ChildRVListener {
+            object : ChildRvListener {
                 override fun onClick(malId: Int) {
                     findNavController().navigate(
                         R.id.action_navigation_home_to_animeFragment,
                         bundleOf("malId" to malId)
+                    )
+                }
+
+            },object: ParentRvListener {
+                override fun onSeeAllClickListener(topSubtype: TopSubtype) {
+                    findNavController().navigate(
+                        R.id.action_navigation_home_to_topAnimeCategoryListFragment,
+                        bundleOf("topSubtype" to topSubtype.name.lowercase(Locale.getDefault()))
                     )
                 }
             }

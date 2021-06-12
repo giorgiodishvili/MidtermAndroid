@@ -7,14 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myanimelist.MainViewModel
 import com.android.myanimelist.R
-import com.android.myanimelist.callback.ChildRVListener
+import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.ChildRecyclerViewItemBinding
 import com.android.myanimelist.model.base.types.AnimeTopEntity
 
 
 class ChildRecyclerViewAdapter(
     private val list: MutableList<AnimeTopEntity>?,
-    val listener: ChildRVListener
+    val listener: ChildRvListener
 ) :
     RecyclerView.Adapter<ChildRecyclerViewAdapter.MyViewHolder>() {
     private lateinit var mainViewModel: MainViewModel

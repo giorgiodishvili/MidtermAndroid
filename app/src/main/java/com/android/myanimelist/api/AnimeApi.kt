@@ -2,8 +2,8 @@ package com.android.myanimelist.api
 
 
 import com.android.myanimelist.model.anime.Anime
-import com.android.myanimelist.model.base.TopAnimeResponse
-import com.android.myanimelist.model.search.AnimeSearchResult
+import com.android.myanimelist.model.base.response.AnimeSearchResult
+import com.android.myanimelist.model.base.response.TopAnimeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -24,10 +24,10 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        binding.loginBtn.setOnClickListener{
+        binding.loginBtn.setOnClickListener {
             login()
         }
-        binding.signupBtn.setOnClickListener{
+        binding.signupBtn.setOnClickListener {
             register()
         }
         return binding.root

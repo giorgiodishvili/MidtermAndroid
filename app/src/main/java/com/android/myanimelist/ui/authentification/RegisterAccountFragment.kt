@@ -26,7 +26,7 @@ class RegisterAccountFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_register_account, container, false)
 
-        binding.register.setOnClickListener{
+        binding.register.setOnClickListener {
             register()
         }
 

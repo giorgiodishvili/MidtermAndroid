@@ -32,7 +32,7 @@ class YouFragment : Fragment() {
         return binding.root
     }
 
-    private fun init(){
+    private fun init() {
         binding.setOnLoginClicked {
             handleClick()
         }

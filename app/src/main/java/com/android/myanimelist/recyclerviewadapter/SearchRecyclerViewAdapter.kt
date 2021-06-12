@@ -1,6 +1,5 @@
 package com.android.myanimelist.recyclerviewadapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,23 +7,29 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myanimelist.R
-import com.android.myanimelist.callback.ChildRVListener
+import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.SearchRecyclerViewItemBinding
-import com.android.myanimelist.model.base.types.AnimeSearchSubEntity
+import com.android.myanimelist.model.base.types.AnimeTopEntity
 
 class SearchRecyclerViewAdapter(
-    private val listener: ChildRVListener
+    private val listener: ChildRvListener
 ) :
-    PagingDataAdapter<AnimeSearchSubEntity, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+    PagingDataAdapter<AnimeTopEntity, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     private lateinit var binding: SearchRecyclerViewItemBinding
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<AnimeSearchSubEntity>() {
-            override fun areItemsTheSame(oldItem: AnimeSearchSubEntity, newItem: AnimeSearchSubEntity): Boolean =
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<AnimeTopEntity>() {
+            override fun areItemsTheSame(
+                oldItem: AnimeTopEntity,
+                newItem: AnimeTopEntity
+            ): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: AnimeSearchSubEntity, newItem: AnimeSearchSubEntity): Boolean =
+            override fun areContentsTheSame(
+                oldItem: AnimeTopEntity,
+                newItem: AnimeTopEntity
+            ): Boolean =
                 oldItem.malId == newItem.malId
         }
     }
@@ -36,7 +41,7 @@ class SearchRecyclerViewAdapter(
                 R.layout.search_recycler_view_item,
                 parent,
                 false
-            );
+            )
         return MyViewHolder(binding)
     }
 
@@ -46,14 +51,13 @@ class SearchRecyclerViewAdapter(
 
     inner class MyViewHolder(private val binding: SearchRecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var animeSearchSubEntity: AnimeSearchSubEntity
+        private lateinit var animeSearchSubEntity: AnimeTopEntity
 
         fun onBind() {
+
             animeSearchSubEntity = getItem(absoluteAdapterPosition)!!
-            Log.i("onClikkk", "onBindSearch")
             binding.animeSearchSubEntity = animeSearchSubEntity
             binding.root.setOnClickListener {
-                Log.i("onClikkk", "onBindinit()")
                 listener.onClick(animeSearchSubEntity.malId)
             }
         }

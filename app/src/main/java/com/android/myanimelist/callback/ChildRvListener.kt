@@ -1,5 +1,5 @@
 package com.android.myanimelist.callback
 
-interface ChildRVListener {
+interface ChildRvListener {
     fun onClick(malId: Int)
 }

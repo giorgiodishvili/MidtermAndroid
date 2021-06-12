@@ -13,13 +13,16 @@
         <action
             android:id="@+id/action_navigation_home_to_animeFragment"
             app:destination="@id/animeFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_topAnimeCategoryListFragment"
+            app:destination="@id/topAnimeCategoryListFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.android.myanimelist.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_navigation_search_to_animeFragment"
             app:destination="@id/animeFragment" />
@@ -60,4 +63,13 @@
         android:name="com.android.myanimelist.ui.anime.AnimeFragment"
         android:label="fragment_anime"
         tools:layout="@layout/fragment_anime" />
+    <fragment
+        android:id="@+id/topAnimeCategoryListFragment"
+        android:name="com.android.myanimelist.ui.categorylist.TopAnimeCategoryListFragment"
+        android:label="top_anime_category_list_fragment"
+        tools:layout="@layout/top_anime_category_list_fragment" >
+        <action
+            android:id="@+id/action_topAnimeCategoryListFragment_to_animeFragment"
+            app:destination="@id/animeFragment" />
+    </fragment>
 </navigation>

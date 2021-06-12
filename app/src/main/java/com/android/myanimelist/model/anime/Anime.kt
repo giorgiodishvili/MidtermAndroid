@@ -30,12 +30,6 @@ data class Anime(
     val imageUrl: String? = null,
 
     /**
-     * Anime's official trailer URL.
-     */
-    @SerializedName("trailer_url")
-    val trailerUrl: String? = null,
-
-    /**
      * Title of the anime.
      */
     @SerializedName("title")

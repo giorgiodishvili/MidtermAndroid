@@ -21,9 +21,6 @@ class MainViewModel : ViewModel() {
     private val animeMap: MutableMap<Int, MutableList<AnimeTopEntity>> = mutableMapOf()
 
 
-
-
-
     fun init() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -65,7 +62,7 @@ class MainViewModel : ViewModel() {
 
 
     private suspend fun populate(subType: TopSubtype) {
-        if (subType.name == "NONE") {
+        if (subType.name == TopSubtype.NONE.name) {
             val topAnime = RetrofitService.RETROFIT.getTopAnime(1)
             val data = topAnime.body()
             animeMap[subType.ordinal] = data!!.top as MutableList<AnimeTopEntity>
@@ -79,8 +76,6 @@ class MainViewModel : ViewModel() {
             animeMap[subType.ordinal] = data!!.top as MutableList<AnimeTopEntity>
         }
     }
-
-
 
 
 }

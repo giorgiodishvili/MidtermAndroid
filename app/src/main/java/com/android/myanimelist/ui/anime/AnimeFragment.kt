@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.android.myanimelist.R
 import com.android.myanimelist.databinding.FragmentAnimeBinding
-import com.android.myanimelist.model.anime.AnimeViewModel
 
 
 class AnimeFragment : Fragment() {
