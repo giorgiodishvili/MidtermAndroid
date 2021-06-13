@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
-    <item android:drawable="@color/black" />
+    <item android:drawable="@color/splash_screen_background" />
     <item
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:bottom="72dp"
-        android:drawable="@drawable/ic_pikachu_svg_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawable="@drawable/ic_gintoki_foreground"
         android:gravity="center_horizontal" />
+
+
 </layer-list>
