@@ -38,10 +38,8 @@ class LoaderStateAdapter :
         private val motionLayout: ProgressBar = view.findViewById(R.id.progressBar)
 
         fun bind(loadState: LoadState) {
-            if (loadState is LoadState.Error) {
-                //TODO Error Handling
-            }
             motionLayout.isVisible = loadState is LoadState.Loading
         }
+
     }
 }

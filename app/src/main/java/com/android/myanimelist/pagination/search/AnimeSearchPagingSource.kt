@@ -1,5 +1,6 @@
 package com.android.myanimelist.pagination.search
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.android.myanimelist.api.RetrofitService
@@ -25,7 +26,10 @@ class AnimeSearchPagingSource(private val searchWord: String) :
         return try {
             val response = RetrofitService.RETROFIT.searchAnime(searchWord, position)
 
-            val data: List<AnimeGeneralEntity> = response.body()!!.results
+            var data: List<AnimeGeneralEntity>? = null
+
+            data = response.body()!!.results
+
 
             LoadResult.Page(
                 data = data,
@@ -36,10 +40,13 @@ class AnimeSearchPagingSource(private val searchWord: String) :
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
 //            ApiResult.failure<NewsModel>("Error")
+            Log.i("binding", exception.toString())
             return LoadResult.Error(exception)
         } catch (exception: NullPointerException) {
+            Log.i("binding null", exception.toString())
             return LoadResult.Error(exception)
         }
     }
+
 
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.myanimelist.MainViewModel
+import com.android.myanimelist.ui.activity.MainViewModel
 import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.callback.ParentRvListener
@@ -71,6 +72,7 @@ class HomeFragment : Fragment() {
     private fun observe() {
         mainViewModel._fetchedAnimesByCategory.observe(viewLifecycleOwner, {
             binding!!.progressCircular.visibility = GONE
+            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             initRecycler(it)
         })
     }

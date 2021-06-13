@@ -1,11 +1,12 @@
 package com.android.myanimelist.ui.search
 
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -13,13 +14,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.FragmentSearchBinding
+import com.android.myanimelist.databinding.NoItemsFoundBinding
+import com.android.myanimelist.extension.setUp
 import com.android.myanimelist.pagination.LoaderStateAdapter
 import com.android.myanimelist.recyclerviewadapter.GeneralRecyclerViewAdapter
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class SearchFragment : Fragment() {
 
@@ -39,12 +44,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun init() {
+        initRecycler()
         binding.btnSearch.setOnClickListener {
-            binding.loadSearch.visibility = VISIBLE
+            binding.show = true
             val searchWord = checkInput()
-            initRecycler()
+            i("binding", binding.show.toString())
             if (searchWord == null) {
-                binding.loadSearch.visibility = GONE
+                binding.show = false
                 return@setOnClickListener
             }
             fetchAnime(searchWord)
@@ -64,11 +70,22 @@ class SearchFragment : Fragment() {
         )
         binding.searchRv.layoutManager = GridLayoutManager(context, 3)
         binding.searchRv.adapter = adapter.withLoadStateFooter(LoaderStateAdapter())
+        adapter.addLoadStateListener {
+            binding.show = it.refresh is LoadState.Loading
+            if (it.refresh is LoadState.Error) {
+                val error = (it.refresh as LoadState.Error).error
+                if (error is NullPointerException) {
+                    showError("No Anime With Such Name")
+                }
+                if (error is HttpException) {
+                    showError(error.toString())
+                }
+            }
+        }
     }
 
     private fun fetchAnime(searchWord: String) {
         searchViewModel.searchAnime(searchWord).observe(viewLifecycleOwner, {
-            binding.loadSearch.visibility = GONE
             lifecycleScope.launch {
                 adapter.submitData(it)
             }
@@ -82,6 +99,21 @@ class SearchFragment : Fragment() {
             return null
         }
         return searchWord
+    }
+
+    private fun showError(errorMessage: String) {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = NoItemsFoundBinding.inflate(LayoutInflater.from(requireContext()))
+        dialogBinding.error.text = errorMessage
+        dialog.setUp(
+            dialogBinding,
+            R.color.design_default_color_error,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialogBinding.closeButton.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.show()
     }
 
 }

@@ -6,6 +6,5 @@ enum class TopSubtype(type: String = "") {
     UPCOMING("upcoming"),
     TV("tv"),
     MOVIE("movie"),
-    OVA("ova"),
-    SPECIAL("special")
+    OVA("ova")
 }

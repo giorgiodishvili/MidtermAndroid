@@ -37,7 +37,6 @@ class AnimeFragment : Fragment() {
     private fun observeAnimeList() {
         viewModel._fetchedfetchedAnime.observe(viewLifecycleOwner, {
             i("logging", it.toString())
-            binding!!.animeLoad.visibility = View.GONE
             binding!!.anime = it
         })
     }

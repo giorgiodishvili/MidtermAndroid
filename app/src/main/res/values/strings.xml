@@ -15,4 +15,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_search">Search</string>
+    <string name="rating">Rating: %s</string>
+    <string name="rank">Rank: %s</string>
+    <string name="error_popup">Error</string>
+    <string name="close">Close</string>
 </resources>

@@ -1,5 +1,6 @@
-package com.android.myanimelist
+package com.android.myanimelist.ui.activity
 
+import android.os.SystemClock
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,48 +21,39 @@ class MainViewModel : ViewModel() {
 
     private val animeMap: MutableMap<Int, MutableList<AnimeGeneralEntity>> = mutableMapOf()
 
-
     fun init() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val processes1 = async {
-                    populate(TopSubtype.TV)
+            withContext(Dispatchers.Default) {
+                val processes = async {
+                    populateTempMap()
                 }
-                val processes2 = async {
-                    populate(TopSubtype.AIRING)
-                }
-                processes1.await()
-                processes2.await()
-                delay(2100)
-                val processes3 = async {
-                    populate(TopSubtype.MOVIE)
-                }
-                val processes4 = async {
-                    populate(TopSubtype.SPECIAL)
-                }
-                processes3.await()
-                processes4.await()
-                delay(2100)
-                val processes5 = async {
-                    populate(TopSubtype.UPCOMING)
-                }
-
-                val processes6 = async {
-                    populate(TopSubtype.OVA)
-                }
-                processes5.await()
-                processes6.await()
-                val processes7 = async {
-                    populate(TopSubtype.NONE)
-                }
-                processes7.await()
+                processes.await()
                 fetchedAnimesByCategory.postValue(animeMap)
             }
         }
     }
 
+    private suspend fun populateTempMap() {
+        val topAnimeSubtypeIterator = TopSubtype.values().iterator()
+        var elapsedSeconds: Long = 1200
+        while (topAnimeSubtypeIterator.hasNext()) {
+            val tStart = SystemClock.elapsedRealtime()
 
-    private suspend fun populate(subType: TopSubtype) {
+            if (elapsedSeconds < 1000) {
+                delay(1000 - elapsedSeconds)
+            }
+
+            getAnimeByCategory(topAnimeSubtypeIterator.next())
+
+            if (topAnimeSubtypeIterator.hasNext()) {
+                getAnimeByCategory(topAnimeSubtypeIterator.next())
+            }
+            elapsedSeconds = SystemClock.elapsedRealtime() - tStart
+        }
+    }
+
+
+    private suspend fun getAnimeByCategory(subType: TopSubtype) {
         if (subType.name == TopSubtype.NONE.name) {
             val topAnime = RetrofitService.RETROFIT.getTopAnime(1)
             val data = topAnime.body()

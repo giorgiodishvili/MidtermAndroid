@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
-import com.android.myanimelist.databinding.SearchRecyclerViewItemBinding
+import com.android.myanimelist.databinding.GeneralRecyclerViewItemBinding
 import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 
 class GeneralRecyclerViewAdapter(
@@ -16,7 +16,7 @@ class GeneralRecyclerViewAdapter(
 ) :
     PagingDataAdapter<AnimeGeneralEntity, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
-    private lateinit var binding: SearchRecyclerViewItemBinding
+    private lateinit var binding: GeneralRecyclerViewItemBinding
 
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<AnimeGeneralEntity>() {
@@ -38,7 +38,7 @@ class GeneralRecyclerViewAdapter(
         binding =
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.search_recycler_view_item,
+                R.layout.general_recycler_view_item,
                 parent,
                 false
             )
@@ -49,7 +49,7 @@ class GeneralRecyclerViewAdapter(
         (holder as? MyViewHolder)?.onBind()
     }
 
-    inner class MyViewHolder(private val binding: SearchRecyclerViewItemBinding) :
+    inner class MyViewHolder(private val binding: GeneralRecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private lateinit var animeSearchSubEntity: AnimeGeneralEntity
 

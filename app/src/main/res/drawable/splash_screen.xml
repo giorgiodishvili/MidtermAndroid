@@ -3,10 +3,10 @@
     android:opacity="opaque">
     <item android:drawable="@color/splash_screen_background" />
     <item
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawable="@drawable/ic_gintoki_foreground"
-        android:gravity="center_horizontal" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawable="@drawable/ic_gintoki_logo"
+        android:gravity="center" />
 
 
 </layer-list>
