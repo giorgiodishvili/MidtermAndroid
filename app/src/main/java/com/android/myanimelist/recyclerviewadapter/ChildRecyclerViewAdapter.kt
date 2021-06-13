@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.android.myanimelist.ui.activity.MainViewModel
 import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.databinding.ChildRecyclerViewItemBinding
 import com.android.myanimelist.model.base.types.AnimeGeneralEntity
+import com.android.myanimelist.ui.activity.MainViewModel
 
 
 class ChildRecyclerViewAdapter(

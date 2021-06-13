@@ -7,6 +7,7 @@
 
 
         <import type="androidx.core.content.ContextCompat" />
+
         <import type="android.view.View" />
 
 
@@ -85,11 +86,11 @@
             android:id="@+id/ratingTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@{String.format(@string/rating, anime.score.toString())}"
             android:textColor="@color/teal_700"
             android:textSize="20sp"
             android:visibility="@{anime == null ? View.GONE : View.VISIBLE}"
-            android:layout_marginTop="10dp"
             tools:layout_constraintStart_toStartOf="parent"
             tools:layout_constraintTop_toBottomOf="@+id/anime_image" />
 

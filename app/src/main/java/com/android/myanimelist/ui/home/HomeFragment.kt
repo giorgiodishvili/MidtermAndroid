@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.myanimelist.ui.activity.MainViewModel
 import com.android.myanimelist.R
 import com.android.myanimelist.callback.ChildRvListener
 import com.android.myanimelist.callback.ParentRvListener
@@ -21,6 +20,7 @@ import com.android.myanimelist.databinding.FragmentHomeBinding
 import com.android.myanimelist.model.TopSubtype
 import com.android.myanimelist.model.base.types.AnimeGeneralEntity
 import com.android.myanimelist.recyclerviewadapter.ParentRecyclerViewAdapter
+import com.android.myanimelist.ui.activity.MainViewModel
 import java.util.*
 
 class HomeFragment : Fragment() {
